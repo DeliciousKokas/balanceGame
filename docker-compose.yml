@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: vue3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app/
+    
+    command: /bin/sh
+
+    stdin_open: true
+    tty: true

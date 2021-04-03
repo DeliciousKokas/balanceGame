@@ -2,16 +2,49 @@ version: "3.7"
 
 services:
   app:
-    container_name: vue3
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
+      - vue3-volume:/app/node_modules
       - .:/app/
     
-    command: /bin/sh
+    command: yarn run serve
 
     stdin_open: true
     tty: true
+
+  api:
+    build:
+      context: .
+      dockerfile: express-api/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - api-volume:/app/node_modules
+      - ./express-api:/app/
+    depends_on:
+      - db
+      
+    command: node app.js
+
+    stdin_open: true
+    tty: true
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: balance_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-confd:/etc/mysql/conf.d  
+
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  vue3-volume:
+  api-volume:

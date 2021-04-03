@@ -1,4 +1,13 @@
 <template>
+  <div class="balanceBox">
+    <div class="balanceBox__box--left">
+      left_button
+    </div>
+    <div class="balanceBox__center">
+      <span>VS</span>
+    </div>
+    <div class="balanceBox__box--right">right_button</div>
+  </div>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
@@ -7,12 +16,59 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useCount } from "@/hooks/useCount";
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default defineComponent({
-  name: 'Home',
   components: {
     HelloWorld,
   },
+  
+  setup() {
+    return {
+      ...useCount()
+    };
+  }
 });
 </script>
+
+<style lang="scss" scoped>
+.balanceBox{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  %__box {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    height: 150px;
+    transition: transform .2s;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    
+    &:hover{
+      transform: scale(1.02);
+    }
+  }
+
+  &__box{
+    &--left{
+      @extend %__box;
+      background-color: rgb(255, 0, 0);
+    }
+
+    &--right{
+      @extend %__box;
+      background-color: rgb(0, 0, 255);
+    }
+  }
+
+  &__center{
+  }
+}
+
+</style>

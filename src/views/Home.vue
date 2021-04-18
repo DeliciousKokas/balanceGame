@@ -3,7 +3,9 @@
     <div class="balanceBox__box--left">
       left_button
     </div>
-    <div class="balanceBox__center">
+    <div class="balanceBox__center"
+      v-on:click="getCard()"
+    >
       <span>VS</span>
     </div>
     <div class="balanceBox__box--right">right_button</div>
@@ -16,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useCount } from "@/hooks/useCount";
+import { getNewCard } from '@/hooks/getNewCard';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
 export default defineComponent({
@@ -26,7 +28,7 @@ export default defineComponent({
   
   setup() {
     return {
-      ...useCount()
+      ...getNewCard(),
     };
   }
 });

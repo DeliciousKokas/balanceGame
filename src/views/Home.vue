@@ -1,14 +1,16 @@
 <template>
   <div class="balanceBox">
     <div class="balanceBox__box--left">
-      left_button
+      {{ card.left }}
     </div>
     <div class="balanceBox__center"
       v-on:click="getCard()"
     >
       <span>VS</span>
     </div>
-    <div class="balanceBox__box--right">right_button</div>
+    <div class="balanceBox__box--right">
+      {{ card.right }}
+    </div>
   </div>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">

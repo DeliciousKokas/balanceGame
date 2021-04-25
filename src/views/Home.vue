@@ -6,7 +6,9 @@
     <div class="balanceBox__center"
       v-on:click="getCard()"
     >
+      <font-awesome-icon far icon="thumbs-up" />
       <span>VS</span>
+      <font-awesome-icon icon="user-secret" />
     </div>
     <div class="balanceBox__box--right">
       {{ card.right }}

@@ -3,12 +3,16 @@
     <div class="balanceBox__box--left">
       {{ card.left }}
     </div>
-    <div class="balanceBox__center"
-      v-on:click="getCard()"
-    >
-      <font-awesome-icon far icon="thumbs-up" />
-      <span>VS</span>
-      <font-awesome-icon icon="user-secret" />
+    <div class="balanceBox__center">
+      <div 
+        class="balanceBox__like"
+        @click="postLike()"
+      >
+        <font-awesome-icon :icon="['far', 'thumbs-up']" />
+        <span>{{ card.like }}</span>
+      </div>
+      <span @click="getCard()">VS</span>
+      <span>{{ card.disLike }}</span>
     </div>
     <div class="balanceBox__box--right">
       {{ card.right }}
@@ -74,6 +78,20 @@ export default defineComponent({
   }
 
   &__center{
+    display: flex;
+    flex-direction: column;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(255, 255, 255);
+    border: 1px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgb(0, 0, 255);
+    display: inline-block;
+    
+    .fa-thumbs-up {
+      color: rgb(0, 0, 255);
+    }
   }
 }
 

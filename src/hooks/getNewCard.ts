@@ -5,7 +5,9 @@ import axios from 'axios';
 export const getNewCard = () => {
   const card = reactive({
     left: "String",
-    right: "String"
+    right: "String",
+    like: 0,
+    disLike: 0,
   });
 
   const getCard = () => {
@@ -15,6 +17,8 @@ export const getNewCard = () => {
       const cardData = response.data[0]
       card.left = cardData.LeftCard
       card.right = cardData.RightCard
+      card.like = cardData.Liked
+      card.disLike = cardData.Disliked
       console.log(card)
       console.log(response)
     })
@@ -23,8 +27,13 @@ export const getNewCard = () => {
     })
   }
 
+  const postLike = () => {
+    card.like++
+  }
+
   return {
     card,
-    getCard
+    getCard,
+    postLike
   };
 };

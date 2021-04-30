@@ -4,25 +4,36 @@
       {{ card.left }}
     </div>
     <div class="balanceBox__center">
-      <div 
-        class="balanceBox__like"
-        @click="postLike()"
-      >
-        <font-awesome-icon
-          v-if=!card.liked
-          class="balanceBox__like--false"
-          :icon="['far', 'thumbs-up']" 
-        />
-        <font-awesome-icon
-          v-else
-          class="balanceBox__like--true"
-          :icon="['fas', 'check']" 
-        />
-      </div>
-      <span @click="getCard()">VS</span>
+      <span>VS</span>
     </div>
     <div class="balanceBox__box--right">
       {{ card.right }}
+    </div>
+  </div>
+  <div class="interFace">
+    <div
+      class="interFace__like"
+      @click="postLike()"
+    >
+      <font-awesome-icon
+        v-if=!card.liked
+        class="interFace__like--false"
+        :icon="['far', 'thumbs-up']" 
+      />
+      <font-awesome-icon
+        v-else
+        class="interFace__like--true"
+        :icon="['fas', 'check']" 
+      />
+    </div>
+    <div
+      class="interFace__next"
+      @click="getCard()"
+    >
+      <span>Next</span> 
+      <font-awesome-icon
+        :icon="['fas', 'forward']" 
+      />
     </div>
   </div>
 </template>
@@ -52,7 +63,6 @@ export default defineComponent({
     font-weight: bold;
     width: 100%;
     height: 150px;
-    transition: transform .2s;
     color: white;
     padding: 10px;
     margin: 5px;
@@ -60,6 +70,7 @@ export default defineComponent({
     
     &:hover{
       transform: scale(1.02);
+      transition: transform .2s;
     }
   }
 
@@ -82,6 +93,13 @@ export default defineComponent({
     justify-content: center;
   }
 
+}
+
+.interFace{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   %__like {
     border-color: rgb(0, 0, 255);
     border: 1px;
@@ -96,17 +114,41 @@ export default defineComponent({
   }
 
   &__like{
+    width: 40px;
+    height: 40px;
         
-    .balanceBox__like--false {
+    &--false {
       @extend %__like;
       color: rgb(0, 0, 255);
       background-color: rgb(255, 255, 255);
     }
 
-    .balanceBox__like--true {
+    &--true {
       @extend %__like;
       color: rgb(255, 255, 255);
       background-color: rgb(0, 0, 255);
+    }
+  }
+
+  &__next{
+    display: flex;
+    align-items: center;
+
+    border: 1px;
+    border-radius: 5%;
+    border-style: solid;
+    padding: 3px 10px;
+    margin: 5px;
+    cursor: pointer;
+
+    &:hover{
+      transform: scale(1.03);
+      transition: transform .2s;
+    }
+    
+    span{
+      font-weight: bold;
+      margin: 5px;
     }
   }
 }

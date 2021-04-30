@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
       
-    command: node app.js
+    command: nodemon app.js
 
     stdin_open: true
     tty: true

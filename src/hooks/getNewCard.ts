@@ -4,23 +4,24 @@ import axios from 'axios';
 
 export const getNewCard = () => {
   const card = reactive({
+    id: 0,
     left: "String",
     right: "String",
-    like: 0,
-    disLike: 0,
+    liked: false,
+    disLiked: false,
   });
 
   const getCard = () => {
     axios
     .get(`http://localhost:3000/api/boxs`)
-    .then((response) => {
-      const cardData = response.data[0]
+    .then((res) => {
+      const cardData = res.data[0]
+      card.id = cardData.ID
       card.left = cardData.LeftCard
       card.right = cardData.RightCard
-      card.like = cardData.Liked
-      card.disLike = cardData.Disliked
+      card.liked = false
+      card.disLiked = false
       console.log(card)
-      console.log(response)
     })
     .catch((error: any) => {
       console.log(error)
@@ -28,7 +29,19 @@ export const getNewCard = () => {
   }
 
   const postLike = () => {
-    card.like++
+    card.liked = !card.liked
+    
+    axios
+    .put(`http://localhost:3000/api/boxs/like`, {
+      id: card.id,
+      count: card.liked? 1 : -1
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
   }
 
   return {

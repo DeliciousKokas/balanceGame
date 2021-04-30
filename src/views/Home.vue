@@ -8,11 +8,18 @@
         class="balanceBox__like"
         @click="postLike()"
       >
-        <font-awesome-icon :icon="['far', 'thumbs-up']" />
-        <span>{{ card.like }}</span>
+        <font-awesome-icon
+          v-if=!card.liked
+          class="balanceBox__like--false"
+          :icon="['far', 'thumbs-up']" 
+        />
+        <font-awesome-icon
+          v-else
+          class="balanceBox__like--true"
+          :icon="['fas', 'check']" 
+        />
       </div>
       <span @click="getCard()">VS</span>
-      <span>{{ card.disLike }}</span>
     </div>
     <div class="balanceBox__box--right">
       {{ card.right }}
@@ -66,6 +73,7 @@ export default defineComponent({
   }
 
   &__box{
+
     &--left{
       @extend %__box;
       background-color: rgb(255, 0, 0);
@@ -80,17 +88,34 @@ export default defineComponent({
   &__center{
     display: flex;
     flex-direction: column;
-    height: 25px;
-    width: 25px;
-    background-color: rgb(255, 255, 255);
+    justify-content: center;
+  }
+
+  %__like {
+    border-color: rgb(0, 0, 255);
     border: 1px;
     border-radius: 50%;
     border-style: solid;
-    border-color: rgb(0, 0, 255);
+    padding: 10px;
     display: inline-block;
-    
-    .fa-thumbs-up {
+  
+    &:hover{
+      transform: scale(1.02);
+    }
+  }
+
+  &__like{
+        
+    .balanceBox__like--false {
+      @extend %__like;
       color: rgb(0, 0, 255);
+      background-color: rgb(255, 255, 255);
+    }
+
+    .balanceBox__like--true {
+      @extend %__like;
+      color: rgb(255, 255, 255);
+      background-color: rgb(0, 0, 255);
     }
   }
 }

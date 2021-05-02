@@ -5,11 +5,12 @@ import axios from 'axios';
 export const getNewCard = () => {
   const card = reactive({
     id: 0,
-    title: "String",
-    left: "String",
-    right: "String",
+    title: "",
+    left: "",
+    right: "",
+    leftVotedAmout: 0,
+    rightVotedAmout: 0,
     liked: false,
-    disLiked: false,
   });
 
   const getCard = () => {
@@ -21,8 +22,8 @@ export const getNewCard = () => {
       card.title = cardData.title ? cardData.title : "1つを選ぶとしたら?"
       card.left = cardData.left_card
       card.right = cardData.right_card
-      card.liked = false
-      card.disLiked = false
+      card.leftVotedAmout = cardData.left_voted_amout
+      card.rightVotedAmout = cardData.right_voted_amout
       console.log(card)
     })
     .catch((error: any) => {
@@ -45,6 +46,8 @@ export const getNewCard = () => {
       console.log(error)
     })
   }
+
+  getCard();
 
   return {
     card,

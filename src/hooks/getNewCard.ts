@@ -5,6 +5,7 @@ import axios from 'axios';
 export const getNewCard = () => {
   const card = reactive({
     id: 0,
+    title: "String",
     left: "String",
     right: "String",
     liked: false,
@@ -16,9 +17,10 @@ export const getNewCard = () => {
     .get(`http://localhost:3000/api/boxs`)
     .then((res) => {
       const cardData = res.data[0]
-      card.id = cardData.ID
-      card.left = cardData.LeftCard
-      card.right = cardData.RightCard
+      card.id = cardData.id
+      card.title = cardData.title ? cardData.title : "1つを選ぶとしたら?"
+      card.left = cardData.left_card
+      card.right = cardData.right_card
       card.liked = false
       card.disLiked = false
       console.log(card)
@@ -30,7 +32,7 @@ export const getNewCard = () => {
 
   const postLike = () => {
     card.liked = !card.liked
-    
+
     axios
     .put(`http://localhost:3000/api/boxs/like`, {
       id: card.id,

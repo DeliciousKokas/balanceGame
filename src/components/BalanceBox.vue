@@ -1,4 +1,5 @@
 <template>
+  {{ card.title }}
   <div class="balanceBox">
     <div class="balanceBox__box--left">
       {{ card.left }}

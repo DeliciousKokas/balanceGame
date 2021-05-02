@@ -27,7 +27,7 @@ const server = app.listen(3000, () => {
 app.get('/api/boxs', (req, res) => {
   console.log('req: get /api/boxs');
 
-  const sql = "SELECT s.* FROM `Cards` AS s INNER JOIN (SELECT CEIL(RAND() * (SELECT MAX(`id`) FROM `Cards`)) AS `id`) AS `tmp` ON s.id = tmp.id;"
+  const sql = "SELECT tmp.* FROM `cards` AS tmp INNER JOIN (SELECT CEIL(RAND() * (SELECT MAX(`id`) FROM `cards`)) AS `id`) AS `random` ON tmp.id = random.id;"
 
 	db.query(sql, function (err, result, fields) {  
     if (err) throw err;

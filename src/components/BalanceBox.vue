@@ -16,16 +16,18 @@
       class="interFace__like"
       @click="postLike()"
     >
-      <font-awesome-icon
-        v-if=!card.liked
-        class="interFace__like--false"
-        :icon="['far', 'thumbs-up']" 
-      />
-      <font-awesome-icon
-        v-else
-        class="interFace__like--true"
-        :icon="['fas', 'check']" 
-      />
+      <transition name="postLike" mode="out-in">
+        <font-awesome-icon
+          v-if=!card.liked
+          class="interFace__like--false"
+          :icon="['far', 'thumbs-up']" 
+        />
+        <font-awesome-icon
+          v-else
+          class="interFace__like--true"
+          :icon="['fas', 'check']" 
+        />
+      </transition>
     </div>
     <div
       class="interFace__next"
@@ -53,6 +55,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .balanceBox{
   display: flex;
   justify-content: center;
@@ -101,6 +104,14 @@ export default defineComponent({
   justify-content: flex-end;
   align-items: center;
 
+  .postLike-enter-active, .postLike-leave-active {
+    transition: opacity .4s
+  }
+
+  .postLike-enter, .postLike-leave-to {
+    opacity: 0.05
+  }
+
   %__like {
     border-color: rgb(0, 0, 255);
     border: 1px;
@@ -108,9 +119,11 @@ export default defineComponent({
     border-style: solid;
     padding: 10px;
     display: inline-block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   
     &:hover{
-      transform: scale(1.02);
+      transform: scale(1.1);
+      // transition: transform .2s;
     }
   }
 
@@ -141,9 +154,10 @@ export default defineComponent({
     padding: 3px 10px;
     margin: 5px;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 
     &:hover{
-      transform: scale(1.03);
+      transform: scale(1.05);
       transition: transform .2s;
     }
     

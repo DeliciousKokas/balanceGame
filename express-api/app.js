@@ -40,7 +40,7 @@ app.get('/api/boxs', (req, res) => {
 app.put('/api/boxs/like', (req, res) => {
   console.log('req: put /api/boxs/like');
 
-  const sql = "UPDATE Cards SET Liked = Liked + ? WHERE ID = ?;"
+  const sql = "UPDATE cards SET Liked = Liked + ? WHERE ID = ?;"
 
 	db.query(sql, [req.body.count, req.body.id], function (err, result, fields) {  
     if (err) throw err;

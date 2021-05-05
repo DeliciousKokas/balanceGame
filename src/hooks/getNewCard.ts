@@ -11,6 +11,7 @@ export const getNewCard = () => {
     leftVotedAmout: 0,
     rightVotedAmout: 0,
     liked: false,
+    voted: "",
   });
 
   const getCard = () => {
@@ -24,6 +25,7 @@ export const getNewCard = () => {
       card.right = cardData.right_card
       card.leftVotedAmout = cardData.left_voted_amout
       card.rightVotedAmout = cardData.right_voted_amout
+      card.voted = ""
       console.log(card)
     })
     .catch((error: any) => {
@@ -31,7 +33,23 @@ export const getNewCard = () => {
     })
   }
 
-  const postLike = () => {
+  const postVote = (selectedCard: string) => {
+    card.voted = selectedCard
+
+    axios
+    .put(`http://localhost:3000/api/boxs/vote`, {
+      id: card.id,
+      voted: selectedCard
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+  }
+
+  const putLike = () => {
     card.liked = !card.liked
 
     axios
@@ -52,6 +70,7 @@ export const getNewCard = () => {
   return {
     card,
     getCard,
-    postLike
+    postVote,
+    putLike
   };
 };

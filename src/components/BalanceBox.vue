@@ -4,26 +4,50 @@
       <span>{{ card.title }}</span>
     </div>
     <div class="balanceBox__boxes">
-      <div class="balanceBox__left">
+      <div
+        class="balanceBox__left"
+        @click="postVote(`left`)"
+      >
         <div class="balanceBox__left--icon">
           <font-awesome-icon
-            class="interFace__next--click"
+            class="balanceBox__left--click"
             :icon="['fas', 'dog']" 
           />
         </div>
         <div class="balanceBox__left--text">
           <span>{{ card.left }}</span>
         </div>
+        <div
+          class="balanceBox__left--voted"
+          v-if="card.voted == `left`"
+        >
+          <font-awesome-icon
+            class="balanceBox__left--checked"
+            :icon="['fas', 'check-circle']" 
+          />
+        </div>
       </div>
-      <div class="balanceBox__right">
+      <div
+        class="balanceBox__right"
+        @click="postVote(`right`)"
+      >
         <div class="balanceBox__right--icon">
           <font-awesome-icon
-            class="interFace__next--click"
+            class="balanceBox__right--click"
             :icon="['fas', 'cat']" 
           />
         </div>
         <div class="balanceBox__right--text">
           <span>{{ card.right }}</span>
+        </div>
+        <div
+          class="balanceBox__right--voted"
+          v-if="card.voted == `right`"
+        >
+          <font-awesome-icon
+            class="balanceBox__right--checked"
+            :icon="['fas', 'check-circle']" 
+          />
         </div>
       </div>
     </div>
@@ -31,7 +55,7 @@
   <div class="interFace">
     <div
       class="interFace__like"
-      @click="postLike()"
+      @click="putLike()"
     >
       <font-awesome-icon
         v-if=!card.liked
@@ -93,6 +117,7 @@ export default defineComponent({
   %__box {
     display: flex;
     flex-direction: column;
+    position:  relative;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
@@ -124,6 +149,20 @@ export default defineComponent({
     margin: auto;
   }
 
+  %--voted{
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  %--checked{
+    width: 64px;
+    height: 64px;
+    opacity: .3;
+  }
+
   &__left{
     @extend %__box;
 
@@ -134,6 +173,15 @@ export default defineComponent({
 
     &--text{
       @extend %--text;
+    }
+
+    &--voted{
+      @extend %--voted;
+    }
+
+    &--checked{
+      @extend %--checked;
+      color: #E53935;
     }
   }
 
@@ -147,6 +195,15 @@ export default defineComponent({
 
     &--text{
       @extend %--text;
+    }
+
+    &--voted{
+      @extend %--voted;
+    }
+
+    &--checked{
+      @extend %--checked;
+      color: #1E88E5;
     }
   }
 

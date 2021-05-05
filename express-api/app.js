@@ -37,10 +37,24 @@ app.get('/api/boxs', (req, res) => {
     });
 });
 
+app.put('/api/boxs/vote', (req, res) => {
+  console.log('req: put /api/boxs/vote');
+  console.log(req.body.voted);
+  
+  const sql = (req.body.voted === "left") ? "UPDATE cards SET left_voted_amount = left_voted_amount + 1 WHERE ID = ?;" :  "UPDATE cards SET right_voted_amount = right_voted_amount + 1 WHERE ID = ?;"
+
+	db.query(sql, req.body.id, function (err, result, fields) {  
+    if (err) throw err;
+    res.send("like request has been succeed!");
+
+    console.log(result);
+    });
+});
+
 app.put('/api/boxs/like', (req, res) => {
   console.log('req: put /api/boxs/like');
 
-  const sql = "UPDATE cards SET Liked = Liked + ? WHERE ID = ?;"
+  const sql = "UPDATE cards SET liked = liked + ? WHERE ID = ?;"
 
 	db.query(sql, [req.body.count, req.body.id], function (err, result, fields) {  
     if (err) throw err;

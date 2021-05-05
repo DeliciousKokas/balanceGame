@@ -1,26 +1,30 @@
 <template>
-  {{ card.title }}
   <div class="balanceBox">
-    <div class="balanceBox__left">
-      <div class="balanceBox__left--icon">
-        <font-awesome-icon
-          class="interFace__next--click"
-          :icon="['fas', 'dog']" 
-        />
-      </div>
-      <div class="balanceBox__left--text">
-        <span>{{ card.left }}</span>
-      </div>
+    <div class="balanceBox__title">
+      <span>{{ card.title }}</span>
     </div>
-    <div class="balanceBox__right">
-      <div class="balanceBox__right--icon">
-        <font-awesome-icon
-          class="interFace__next--click"
-          :icon="['fas', 'cat']" 
-        />
+    <div class="balanceBox__boxes">
+      <div class="balanceBox__left">
+        <div class="balanceBox__left--icon">
+          <font-awesome-icon
+            class="interFace__next--click"
+            :icon="['fas', 'dog']" 
+          />
+        </div>
+        <div class="balanceBox__left--text">
+          <span>{{ card.left }}</span>
+        </div>
       </div>
-      <div class="balanceBox__right--text">
-        <span>{{ card.right }}</span>
+      <div class="balanceBox__right">
+        <div class="balanceBox__right--icon">
+          <font-awesome-icon
+            class="interFace__next--click"
+            :icon="['fas', 'cat']" 
+          />
+        </div>
+        <div class="balanceBox__right--text">
+          <span>{{ card.right }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -69,21 +73,33 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .balanceBox{
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  &__title{
+    color: #FFF;
+    font-size: 28px;
+    font-weight: bold;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, #FFF 25%, #E0E0E0 50%, #FFF 75%);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+  &__boxes{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 
   %__box {
     display: flex;
     flex-direction: column;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
     height: 200px;
     margin: 10px;
     border-radius: 5px;
-    box-shadow: 0px 3px 4px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 4px #757575;
     cursor: pointer;
     
     &:hover{
@@ -113,7 +129,7 @@ export default defineComponent({
 
     &--icon{
       @extend %--icon;
-      background-color: rgb(255, 0, 0);
+      background-color: #E53935;
     }
 
     &--text{
@@ -126,7 +142,7 @@ export default defineComponent({
     
     &--icon{
       @extend %--icon;
-      background-color:rgb(0, 0, 255);
+      background-color:#1E88E5;
     }
 
     &--text{
@@ -142,13 +158,13 @@ export default defineComponent({
   align-items: center;
 
   %__like {
-    border-color: rgb(0, 0, 255);
+    border-color: #1E88E5;
     border: 1px;
     border-radius: 50%;
     border-style: solid;
     padding: 10px;
     display: inline-block;
-    box-shadow: 0 3px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 3px 4px #757575;
     cursor: pointer;
   
     &:hover{
@@ -167,14 +183,14 @@ export default defineComponent({
         
     &--false {
       @extend %__like;
-      color: rgb(0, 0, 255);
+      color: #1E88E5;
       background-color: rgb(255, 255, 255);
     }
 
     &--true {
       @extend %__like;
       color: rgb(255, 255, 255);
-      background-color: rgb(0, 0, 255);
+      background-color: #1E88E5;
     }
   }
 
@@ -182,12 +198,13 @@ export default defineComponent({
     display: flex;
     align-items: center;
     border: 1px;
+    border-color: #757575;
     border-radius: 3px;
     border-style: solid;
     padding: 3px 10px;
     margin: 10px;
     cursor: pointer;
-    box-shadow: 0px 3px 4px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 4px #757575;
 
     &:hover{
       transform: scale(1.08);

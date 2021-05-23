@@ -14,6 +14,15 @@ export const getNewCard = () => {
     voted: "",
   });
 
+  const comments = reactive({
+    comment: {
+      voted: "",
+      comment: "test",
+      liked: "",
+      createdAt: "",
+    }
+  });
+
   const getCard = () => {
     axios
     .get(`http://localhost:3000/api/boxs`)
@@ -33,7 +42,7 @@ export const getNewCard = () => {
     })
   }
 
-  const postVote = (selectedCard: string) => {
+  const putVote = (selectedCard: string) => {
     card.voted = selectedCard
 
     axios
@@ -65,12 +74,30 @@ export const getNewCard = () => {
     })
   }
 
+  const getComments = () => {
+    axios
+    .get(`http://localhost:3000/api/comments`, {
+      params: {
+        id: card.id
+      }
+    })
+    .then((res) => {
+      const commnetsData = res.data[0]
+      console.log(res)
+    })
+    .catch((error: any) => {
+      console.log(error)
+    })
+  }
+
   getCard();
 
   return {
     card,
+    comments,
     getCard,
-    postVote,
-    putLike
+    putVote,
+    putLike,
+    getComments
   };
 };

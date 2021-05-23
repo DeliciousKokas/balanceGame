@@ -63,3 +63,26 @@ app.put('/api/boxs/like', (req, res) => {
     console.log(result);
     });
 });
+
+app.get('/api/comments', (req, res) => {
+  console.log('req: get /api/comments');
+  console.log(req.query.id);
+
+  const sql = "SELECT * FROM `comments` WHERE card_id = ?;"
+
+  db.query(sql, [req.query.id], function (err, result, fields) {  
+    if (err) throw err;
+    res.send(result);
+
+    console.log(result);
+    });
+  
+  // const sql = "SELECT tmp.* FROM `cards` AS tmp INNER JOIN (SELECT CEIL(RAND() * (SELECT MAX(`id`) FROM `cards`)) AS `id`) AS `random` ON tmp.id = random.id;"
+
+	// db.query(sql, function (err, result, fields) {  
+  //   if (err) throw err;
+  //   res.send(result)
+
+  //   console.log(result);
+  //   });
+});

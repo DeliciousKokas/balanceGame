@@ -6,7 +6,7 @@
     <div class="balanceBox__boxes">
       <div
         class="balanceBox__left"
-        @click="postVote(`left`)"
+        @click="putVote(`left`)"
       >
         <div class="balanceBox__left--icon">
           <font-awesome-icon
@@ -29,7 +29,7 @@
       </div>
       <div
         class="balanceBox__right"
-        @click="postVote(`right`)"
+        @click="putVote(`right`)"
       >
         <div class="balanceBox__right--icon">
           <font-awesome-icon
@@ -79,6 +79,8 @@
       />
     </div>
   </div>
+  <button @click="getComments()">get comment</button>
+  {{ comments.comment.comment }}
 </template>
 
 <script lang="ts">

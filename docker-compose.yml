@@ -16,35 +16,5 @@ services:
     stdin_open: true
     tty: true
 
-  api:
-    build:
-      context: .
-      dockerfile: express-api/Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - api-volume:/app/node_modules
-      - ./express-api:/app/
-    depends_on:
-      - db
-      
-    command: nodemon app.js
-
-    stdin_open: true
-    tty: true
-
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: balance_db
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./mysql-confd:/etc/mysql/conf.d  
-
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-
 volumes:
   vue3-volume:
-  api-volume:

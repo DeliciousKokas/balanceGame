@@ -25,7 +25,7 @@ export const getNewCard = () => {
 
   const getCard = () => {
     axios
-    .get(`http://localhost:3000/api/boxs`)
+    .get(`${process.env.VUE_APP_API_URL}/api/boxs`)
     .then((res) => {
       const cardData = res.data[0]
       card.id = cardData.id
@@ -46,7 +46,7 @@ export const getNewCard = () => {
     card.voted = selectedCard
 
     axios
-    .put(`http://localhost:3000/api/boxs/vote`, {
+    .put(`${process.env.VUE_APP_API_URL}/api/boxs/vote`, {
       id: card.id,
       voted: selectedCard
     })
@@ -62,7 +62,7 @@ export const getNewCard = () => {
     card.liked = !card.liked
 
     axios
-    .put(`http://localhost:3000/api/boxs/like`, {
+    .put(`${process.env.VUE_APP_API_URL}/api/boxs/like`, {
       id: card.id,
       count: card.liked? 1 : -1
     })
@@ -76,7 +76,7 @@ export const getNewCard = () => {
 
   const getComments = () => {
     axios
-    .get(`http://localhost:3000/api/comments`, {
+    .get(`${process.env.VUE_APP_API_URL}/api/comments`, {
       params: {
         id: card.id
       }

@@ -11,7 +11,7 @@ services:
       - vue3-volume:/app/node_modules
       - .:/app/
     
-    command: yarn run serve
+    command: /bin/sh -c "yarn install && yarn run serve"
 
     stdin_open: true
     tty: true

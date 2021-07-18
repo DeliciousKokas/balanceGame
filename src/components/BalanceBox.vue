@@ -80,7 +80,12 @@
     </div>
   </div>
   <button @click="getComments()">get comment</button>
-  {{ comments.comment.comment }}
+  <div v-for="(comment) in comments.comment" v-bind:key="comment.id">
+    {{ comment.comment }}
+    {{ comment.voted }}
+    {{ comment.liked }}
+    {{ comment.created_at }}
+  </div>
 </template>
 
 <script lang="ts">

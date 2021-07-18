@@ -15,19 +15,15 @@ export const getNewCard = () => {
   });
 
   const comments = reactive({
-    comment: {
-      voted: "",
-      comment: "test",
-      liked: "",
-      createdAt: "",
-    }
+    comment: {}
   });
 
   const getCard = () => {
     axios
     .get(`${process.env.VUE_APP_API_URL}/api/boxs`)
     .then((res) => {
-      const cardData = res.data[0]
+      console.log(res)
+      const cardData = res.data
       card.id = cardData.id
       card.title = cardData.title ? cardData.title : "1つを選ぶとしたら?"
       card.left = cardData.left_card
@@ -82,7 +78,7 @@ export const getNewCard = () => {
       }
     })
     .then((res) => {
-      const commnetsData = res.data[0]
+      comments.comment = res.data
       console.log(res)
     })
     .catch((error: any) => {

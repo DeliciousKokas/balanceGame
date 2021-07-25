@@ -18,9 +18,13 @@ export const getNewCard = () => {
     comment: {}
   });
 
-  const getCard = () => {
+  const getCard = (id: string | null) => {
     axios
-    .get(`${process.env.VUE_APP_API_URL}/api/boxs`)
+    .get(`${process.env.VUE_APP_API_URL}/api/boxs`, {
+      params: {
+        id: id
+      }
+    })
     .then((res) => {
       console.log(res)
       const cardData = res.data
@@ -85,8 +89,10 @@ export const getNewCard = () => {
       console.log(error)
     })
   }
-
-  getCard();
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('id');
+  getCard(myParam);
 
   return {
     card,

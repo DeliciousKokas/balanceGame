@@ -79,12 +79,21 @@
       />
     </div>
   </div>
-  <button @click="getComments()">get comment</button>
-  <div v-for="(comment) in comments.comment" v-bind:key="comment.id">
-    {{ comment.comment }}
-    {{ comment.voted }}
-    {{ comment.liked }}
-    {{ comment.created_at }}
+  <div class="comments">
+    <div 
+      class="comments__loader"
+      @click="getComments()"
+    >
+      <span>get comment</span>
+    </div>
+    <div class="comments__comment">
+      <div v-for="(comment) in comments.comment" v-bind:key="comment.id">
+        {{ comment.comment }}
+        {{ comment.voted }}
+        {{ comment.liked }}
+        {{ comment.created_at }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -261,10 +270,8 @@ export default defineComponent({
   &__next{
     display: flex;
     align-items: center;
-    border: 1px;
-    border-color: #757575;
+    border: 1px #757575 solid;
     border-radius: 3px;
-    border-style: solid;
     padding: 3px 10px;
     margin: 10px;
     cursor: pointer;
@@ -286,4 +293,31 @@ export default defineComponent({
   }
 }
 
+.comments{
+  &__loader{
+    display: flex;
+    justify-content: center;
+    padding: 3px 10px;
+    margin: 10px;
+    border: 1px #757575 solid;
+    border-radius: 3px;
+    transition: 0.4s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+      background: #757575;
+      transform: scale(1.08);
+      transition: transform .2s;
+    }
+
+    &:active{
+      transform: scale(1);
+    } 
+  }
+
+  &__commet{
+    
+  }
+}
 </style>
